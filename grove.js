@@ -100,18 +100,33 @@ exports.getTemperature = function() {
 exports.setupEvents = function() {
 	  var prev = { button: 0 };
 	  var count = 0;
+	  exports.count = count;
           var events = new (require("events").EventEmitter)();
-
-	    setInterval(function() {
+	  setTimeout(function() {
+	    setInterval(function () {
 		        var pressed = button.value();
-			if (pressed && !prev.button) { events.emit("button-press");
+			if (pressed && !prev.button) { 
+						      
 			                  	       count++; 
+						     
 						       console.log("count: " + count);
-						       if (count == 1) {console.log("12 oz.");}
-						       else if (count == 2) {console.log("16 oz.");}
-						       else {console.log("20 oz.");}
+						       if (count == 1) {
+							       console.log("12 oz.");}
+						       else if (count == 2) {
+							       console.log("16 o z.");}
+						       else 
+						       {
+							       console.log("20 oz.");
+						               
+						       }
 			}
                         if (!pressed && prev.button) { events.emit("button-release"); }
 				 prev.button = pressed;
-					  }, 100);
+					  }
+					  , 10);
+
+		}, 200).then = function() {
+		console.log("ANISHA~**************************************************.");
+		count();
+		};
 }

@@ -102,7 +102,7 @@ function notifySMS() {
 device.connect();
 
 function fillDashboard() {
-  device.sendState({ temp: tempF, earthlovepoints: 245, waterconsumed: 230, garbagesaved: 127, loyaltypoints: 6000, moneysaved:88 });
+  device.sendState({ temp: 100, earthlovepoints: 245, waterconsumed: 230, garbagesaved: 127, loyaltypoints: 6000, moneysaved:88 });
 }
 // Display and then store record in the remote datastore
 // of each time a fire alarm condition has been triggered
@@ -144,6 +144,12 @@ function monitorTemperature() {
   }, 500);
 }
 
+function count() {
+	var boardCount = board.count;
+	console.log("boardCount");
+	console.log("********************************************");
+	console.log(boardCount);
+}
 // Called to start the alarm when a possible fire
 function alarm() {
   console.log("alarm log 1")
@@ -161,7 +167,7 @@ function alarm() {
     board.reset();
   });
 }
-
+var buttonCount = board.count;
 // The main function makes sure the alarm buzzer and LCD
 // are turned off, then starts checking the ambient temperature
 // using the connected hardware.
