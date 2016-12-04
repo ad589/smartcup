@@ -29,10 +29,12 @@ var mraa = require('mraa');
 
 // devices
 var temp, buzzer, screen;
+var button;
 
 // pins
 var tempPin = 0,
     buzzerPin = 5,
+    buttonPin = 4,
     i2cBus = 6,
     voltageAdjust = 1.0;
 
@@ -44,12 +46,14 @@ exports.init = function(config) {
 
     tempPin += 512;
     buzzerPin += 512;
+    buttonPin += 512;
     i2cBus = 512;
     voltageAdjust = 0.66;
   }
 
   temp = new (require("jsupm_grove").GroveTemp)(tempPin),
   buzzer = new (require("jsupm_buzzer").Buzzer)(buzzerPin),
+  button = new (require("jsupm_grove").GroveButton)(buttonPin),
   screen = new (require("jsupm_i2clcd").Jhd1313m1)(i2cBus, 0x3E, 0x62);
 }
 
@@ -91,4 +95,23 @@ exports.reset = function() {
 
 exports.getTemperature = function() {
   return temp.value() * voltageAdjust;
+}
+
+exports.setupEvents = function() {
+	  var prev = { button: 0 };
+	  var count = 0;
+          var events = new (require("events").EventEmitter)();
+
+	    setInterval(function() {
+		        var pressed = button.value();
+			if (pressed && !prev.button) { events.emit("button-press");
+			                  	       count++; 
+						       console.log("count: " + count);
+						       if (count == 1) {console.log("12 oz.");}
+						       else if (count == 2) {console.log("16 oz.");}
+						       else {console.log("20 oz.");}
+			}
+                        if (!pressed && prev.button) { events.emit("button-release"); }
+				 prev.button = pressed;
+					  }, 100);
 }

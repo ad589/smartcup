@@ -90,6 +90,20 @@ function notifySMS() {
   }, 1000 * 60);
 }
 
+
+	var Device = require('losant-mqtt').Device;
+	// Construct a device instance.
+	var device = new Device({
+	  id: '58437c5ac0b30a010006498a',
+  key: '74cb6d80-5743-4d53-8eb1-66c21abaad16',
+  secret: '880bd7f430f60abc525a27042261c89a3c355112bf13f7d96146e9b3d9ddc924'
+});
+// Connect device to Losant.
+device.connect();
+
+function fillDashboard() {
+  device.sendState({ temp: tempF, earthlovepoints: 245, waterconsumed: 230, garbagesaved: 127, loyaltypoints: 6000, moneysaved:88 });
+}
 // Display and then store record in the remote datastore
 // of each time a fire alarm condition has been triggered
 function notify() {
@@ -99,8 +113,10 @@ function notify() {
 
   var payload = { value: "hot drink", datetime: new Date().toISOString() };
   console.log(payload);
-  datastore.log(config, payload);
-  mqtt.log(config, payload);
+  var tempF = 100;
+ // datastore.log(config, payload);
+ // mqtt.log(config, payload);
+
 }
 
 // Loops every 500ms to check if the ambient temperature
@@ -157,6 +173,8 @@ function main() {
   console.log("temp log 2");
   monitorTemperature();
   console.log("temp log 3");
+  board.setupEvents();
+  fillDashboard();
   events.on("start-alarm", alarm);
 }
 
