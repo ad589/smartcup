@@ -1,0 +1,13 @@
+{
+  "kit": "grove",
+  "ALARM_THRESHOLD": 0,
+  "TWILIO_ACCT_SID": "AC8eae96a69b0d90f8e5090b142d308814",
+  "TWILIO_AUTH_TOKEN": "e03e26a2fbf2de9ae76062e73ffc5070",
+  "NUMBER_TO_SEND_TO": "+13602818722",
+  "TWILIO_OUTGOING_NUMBER": "+13608690621",
+  "MQTT_SERVER": "mqtts://a2f1ak49jpqw5s.iot.us-west-2.amazonaws.com:8883",
+  "MQTT_CLIENTID": "edison1",
+  "MQTT_CERT": "/home/root/.ssh/cert.pem",
+  "MQTT_KEY": "/home/root/.ssh/privateKey.pem",
+  "MQTT_TOPIC": "devices/edison1"
+}

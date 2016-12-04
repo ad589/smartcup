@@ -1,0 +1,5 @@
+ "MQTT_SERVER": "mqtts://a2f1ak49jpqw5s.iot.us-west-2.amazonaws.com:8883",
+   "MQTT_CLIENTID": "edison1",
+   "MQTT_CERT": "/home/root/.ssh/cert.pem",
+   "MQTT_KEY": "/home/root/.ssh/privateKey.pem",
+   "MQTT_TOPIC": "devices/edison1"
